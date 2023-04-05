@@ -13,6 +13,7 @@ var arr = [[0.05, 0.2, 0.05], [0.2, -1, 0.2], [0.05, 0.2, 0.05]];
 
 function setup() {
   createCanvas(W, H);
+  // changing the pixelDensity to a value other than 1 results in the image being stretched repeated along the canvas on axes of different angles
   pixelDensity(1.1);
   grid = [];
   next = [];  
