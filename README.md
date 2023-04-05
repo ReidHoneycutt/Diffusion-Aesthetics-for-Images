@@ -8,7 +8,7 @@ Changing the pixelDensity to a value other than 1 results in the image being str
 
 https://user-images.githubusercontent.com/30945205/225844508-952c4e23-3dbd-4a42-bfee-57bb228d6e95.mp4
 
-
+To get that little glitch effect I just left some images out of the sequence when made the frames in a video.
 
 
 
