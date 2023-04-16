@@ -1,0 +1,132 @@
+//this is a nice little animation I recreated from a web source(link in description)
+
+let W = window.innerWidth;
+let H = window.innerHeight;
+
+var grid;
+var next;
+var dA = 0.1;
+var dB = 0.5;
+var feed = 0.029;
+var k = 0.065;
+var arr = [[0.05, 0.2, 0.05], [0.2, -1, 0.2], [0.05, 0.2, 0.05]];
+var a_points = [];
+var rect_size = 10;
+let c;
+
+function setup() {
+  createCanvas(W, H);
+	c = createCanvas(W, H);
+  // changing the pixelDensity to a value other than 1 results in the image being stretched repeated along the canvas on axes of different angles
+  // try changing it 1.1, 1.5, .9, etc... to see how it looks
+  pixelDensity(1);
+  grid = [];
+  next = [];  
+  for (var x = 0; x < W; x++) {
+    grid[x] = [];
+    next[x] = [];
+    for (var y = 0; y < H; y++) {
+      grid[x][y] = { a: 1, b: 0}; 
+      next[x][y] = { a: 1, b: 0};
+    }
+  }
+
+    //=============== Scaling America Points ===============//
+    let x_coords = []; let y_coords = [];
+    for (let i = 0; i < america_points.length; i++) {
+        x_coords[i] = america_points[i][0];
+        y_coords[i] = america_points[i][1];
+    }
+
+    let min_x = min(x_coords);
+    let max_x = max(x_coords);
+    let min_y = min(y_coords);
+    let max_y = max(y_coords);
+
+    let x_scale = max_x - min_x;
+    let y_scale = max_y - min_y;
+
+    let temp_x; let temp_y;
+    for (let i = 0; i < america_points.length; i++) {
+        temp_x = floor(W * (america_points[i][0] / max_x) * 0.9);
+        temp_y = floor(H * (america_points[i][1] / max_y) * 0.9);
+        if (temp_x >= W) {
+            temp_x = W-rect_size-1;
+        }
+        if (temp_y >= H) {
+            temp_y = H-rect_size-1;
+        }
+        a_points[i] = [temp_x, temp_y]
+    }
+    //===================================================//
+    
+  // this is where you create the diffused image -formed using squares of side length 40
+  for (let k = 0; k < a_points.length; k++) {
+	let x = a_points[k][0];
+	let y = a_points[k][1];
+	// draw the rectangle primitives
+    for (var i = 0; i < rect_size; i++) {
+      for (var j = 0; j < rect_size; j++) {
+          if (i+x >= W) {
+              console.log("i, x, W: ", i, x, W);
+          }
+          if (j+y >= H) {
+              console.log("j, y, H: ", j, y, H);
+          }
+         grid[i+x][j+y].b = 1;
+      }
+    }
+  }
+}
+
+function draw() {
+  background(51);
+  for (var x = 3; x < W-3; x++) {
+    for (var y = 3; y < H-3; y++) {
+      var a = grid[x][y].a + 0.001*Math.cos(frameCount / 100);
+      var b = grid[x][y].b + 0.001*Math.sin(frameCount / 100);
+      next[x][y].a = a + (dA * laplaceA(x, y)) - (a * b * b) + (feed * (1-a));
+      next[x][y].b = b + (dB * laplaceB(x, y)) + (a * b * b) - ((k + feed) * b);
+    }
+  }
+  
+  loadPixels();
+  for (let x = 1; x < W-1; x++) {
+    for (let y = 1; y < H-1; y++) {
+      var pix = (x+y*W)*4;
+      pixels[pix+0] = Math.floor(Math.sin(frameCount * grid[x][y].a)*255);
+      pixels[pix+1] = 0;
+      pixels[pix+2] = Math.floor(Math.cos(frameCount * grid[x][y].b)*255);
+      pixels[pix+3] = 255;
+    }
+  }
+  updatePixels();
+  swap();
+  //save(c, "output.png")
+}
+
+function laplaceA(x, y) {
+  let sum = 0;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      sum += arr[i][j] * grid[x-1+i][y-1+j].a
+    }
+  }
+  return sum;
+}
+
+function laplaceB(x, y) {
+  let sum = 0;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      sum += arr[i][j] * grid[x-1+i][y-1+j].b
+    }
+  }
+  return sum;
+}
+  
+function swap() {
+  var temp = grid;
+  grid = next;
+  next = grid;
+}
