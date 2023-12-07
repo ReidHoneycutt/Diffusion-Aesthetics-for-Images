@@ -4,7 +4,8 @@ This is an implementation of a algorithm which simulates diffusion-reaction to p
 
 https://user-images.githubusercontent.com/30945205/232263156-1eccc107-aecf-41f2-8b86-dad358deae47.mp4
 
-https://user-images.githubusercontent.com/30945205/225844508-952c4e23-3dbd-4a42-bfee-57bb228d6e95.mp4
+<img width="1229" alt="Screenshot 2023-12-06 at 10 13 24 PM" src="https://github.com/ReidHoneycutt/Diffusion-Aesthetics-for-Images/assets/30945205/a1412163-988f-4b57-9131-aff897c3ff70">
+
 <img width="1043" alt="Screenshot 2023-12-06 at 9 58 20 PM" src="https://github.com/ReidHoneycutt/Diffusion-Aesthetics-for-Images/assets/30945205/282add43-6380-43ba-95b3-713feaad49a5">
 
 
