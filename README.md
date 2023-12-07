@@ -6,7 +6,6 @@ https://user-images.githubusercontent.com/30945205/232263156-1eccc107-aecf-41f2-
 
 <img width="1229" alt="Screenshot 2023-12-06 at 10 13 24 PM" src="https://github.com/ReidHoneycutt/Diffusion-Aesthetics-for-Images/assets/30945205/a1412163-988f-4b57-9131-aff897c3ff70">
 
-<img width="1043" alt="Screenshot 2023-12-06 at 9 58 20 PM" src="https://github.com/ReidHoneycutt/Diffusion-Aesthetics-for-Images/assets/30945205/282add43-6380-43ba-95b3-713feaad49a5">
 
 
 Changing the pixelDensity to a value other than 1 results in the image being stretched repeated along the canvas on axes of different angles:
