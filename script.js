@@ -31,15 +31,15 @@ function setup() {
 	let y;
 	if (k % 2 == 0) {
 		x = Math.floor(W/2);
-    	y = Math.floor(H/2);
+    		y = Math.floor(H/2);
 	} else {
-    	x = Math.floor(W/2 - 40);
-    	y = Math.floor(H/2);
+    		x = Math.floor(W/2 - 40);
+    		y = Math.floor(H/2);
   	}
     for (var i = 0; i < 50; i++) {
-      for (var j = 0; j < 50; j++) {
-         grid[i+x][j+y].b = 1;
-      }
+	for (var j = 0; j < 50; j++) {
+        	grid[i+x][j+y].b = 1;
+      	}
     }
   }
 }
